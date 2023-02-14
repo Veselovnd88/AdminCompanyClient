@@ -1,0 +1,19 @@
+server:
+  port: 9103
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          admin-client:
+            provider: my
+            client-id: admin-client
+            client-secret: secret
+            authorization-grant-type: authorization_code
+            scope: admin
+            redirect-uri: http://127.0.0.1:9103/login/oauth2/code/{registrationId}
+        provider:
+          my:
+            issuer-uri: http://127.0.0.1:9102
+

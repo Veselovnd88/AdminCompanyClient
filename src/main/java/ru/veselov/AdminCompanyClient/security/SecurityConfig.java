@@ -14,6 +14,9 @@ import org.springframework.security.oauth2.client.web.DefaultOAuth2AuthorizedCli
 import org.springframework.security.oauth2.client.web.OAuth2AuthorizedClientRepository;
 import org.springframework.security.web.SecurityFilterChain;
 
+import java.lang.reflect.Method;
+
+
 @Configuration
 @Slf4j
 public class SecurityConfig {
@@ -21,7 +24,9 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         log.debug("Настройка filterChain");
-        http.authorizeHttpRequests((request)->request.anyRequest().authenticated())
+
+        http.authorizeHttpRequests((request)->request
+                        .anyRequest().authenticated())
                 .oauth2Login(login->
                         login.loginPage("/oauth2/authorization/admin-client"))
                 .oauth2Client(Customizer.withDefaults());

@@ -9,7 +9,7 @@ spring:
           admin-client:
             provider: my
             client-id: admin-client
-            client-secret: secret
+            client-secret: $2y$10$HZcv.lhSSIacdWvYxFoCdOO7yw9z4wlMbVVr5YDEJZSrv3wk66Sui
             authorization-grant-type: authorization_code
             scope: admin
             redirect-uri: http://127.0.0.1:9103/login/oauth2/code/{registrationId}
@@ -17,3 +17,6 @@ spring:
           my:
             issuer-uri: http://127.0.0.1:9102
 
+logging:
+  level:
+    org.springframework: DEBUG

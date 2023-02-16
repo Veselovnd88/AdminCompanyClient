@@ -6,16 +6,27 @@ spring:
     oauth2:
       client:
         registration:
-          admin-client:
-            provider: my
+          #one client for oidc scope, and another for restTemplate scope, what happend - see in SecurityConfig and RestService
+          admin-client-oidc:
+            provider: spring
             client-id: admin-client
-            client-secret: $2y$10$HZcv.lhSSIacdWvYxFoCdOO7yw9z4wlMbVVr5YDEJZSrv3wk66Sui
+            client-secret: secret
+            authorization-grant-type: authorization_code
+            scope: openid
+            redirect-uri: "http://127.0.0.1:9103/login/oauth2/code/{registrationId}"
+
+          admin-client-authorization-code:
+            provider: spring
+            client-id: admin-client
+            client-secret: secret
             authorization-grant-type: authorization_code
             scope: admin
-            redirect-uri: http://127.0.0.1:9103/login/oauth2/code/{registrationId}
+            redirect-uri: "http://127.0.0.1:9103/authorized"
+
+
         provider:
-          my:
-            issuer-uri: http://127.0.0.1:9102
+          spring:
+            issuer-uri: http://localhost:9102
 
 logging:
   level:
